@@ -3,6 +3,10 @@ body {
     padding: 0;
     background-color: #121212;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 header {
@@ -11,9 +15,21 @@ header {
     text-align: center;
 }
 
-.header h1 {
-    margin: 0;
+main {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
+
+footer {
+    background-color: #1c1c1c;
+    text-align: center;
+    padding: 20px;
+}
+
+
 
 .nav-list {
     list-style: none;
@@ -37,12 +53,6 @@ header {
     color: #ff5722;
 }
 
-main {
-    padding: 40px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .product-grid {
     display: grid;
@@ -62,15 +72,6 @@ main {
 
 .product-item:hover {
     transform: scale(1.05);
-}
-
-footer {
-    background-color: #1c1c1c;
-    text-align: center;
-    padding: 20px;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
 }
 
 .product-item img {

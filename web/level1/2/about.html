@@ -6,26 +6,18 @@
     <title>Про нас - Arduino Marketplace</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <link rel="icon" type="image/png" href="templates/logo.png" />
 </head>
 <body>
-    <header class="header">
-        <h1>Arduino Marketplace</h1>
-        <nav>
-            <ul class="nav-list">
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="products.html">Продукти</a></li>
-                <li><a href="about.html">Про нас</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div hx-get="templates/header.html" hx-trigger="load" hx-target="this"></div>
     
     <main class="main">
         <section class="about-content">
             <h2>Про Arduino Marketplace</h2>
-            <p>Arduino Marketplace — це місце, де ви знайдете всі необхідні компоненти для ваших Arduino проектів. Ми прагнемо надавати найкращі продукти та підтримку для нашої спільноти.</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat porro esse reprehenderit autem velit nihil molestiae, placeat suscipit eveniet dignissimos, neque assumenda et! Aperiam, magnam corporis. Dolorem vero consequuntur harum!</p>
         </section>
     </main>
 
-    <div hx-get="footer.html" hx-trigger="load" hx-target="this"></div>
+    <div hx-get="templates/footer.html" hx-trigger="load" hx-target="this"></div>
 </body>
 </html>
