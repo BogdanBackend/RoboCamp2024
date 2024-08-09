@@ -68,6 +68,7 @@ footer {
     text-align: center;
     border-radius: 10px;
     transition: transform 0.3s;
+    max-width: 400px;
 }
 
 .product-item:hover {
@@ -89,4 +90,32 @@ footer {
 
 .custom-showcase{
     padding: 10px;
+}
+
+.product-item {
+    position: relative;
+    padding: 15px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #fff;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.delete-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: #ff4d4d;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-item:hover {
+    background-color: #ff1a1a;
 }

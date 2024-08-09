@@ -12,33 +12,39 @@
 <body>
     <div hx-get="templates/header.html" hx-trigger="load" hx-target="this"></div>
     
-    <div class="custom-showcase">
-        <h2>Додайте свій об'єкт :</h2>
+    <h2 class="custom-showcase" style="align-self: center;">
         <form id="add-item-form">
+            <p style="display: inline;">Додайте свій товар : </p>
             <input type="text" id="item-name" placeholder="Назва товару" required>
             <input type="url" id="item-image" placeholder="URL зображення" required>
             <input type="text" id="item-details" placeholder="Деталі товару" required>
             <button type="submit">Додати</button>
         </form>
-    </div>
+    </h2>
 
     <main class="main">
         <section class="product-grid">
 
+            <!-- <div class="product-item" data-id="sadad">
+                <img src="" alt="Test Element">
+                <h3>Test Element</h3>
+                <div class="details"> <p>Test Element</p> </div>
+                <div class="delete-item">X</div>
+            </div> -->
+                
         </section>
     </main>
 
     <div hx-get="templates/footer.html" hx-trigger="load" hx-target="this"></div>
 
     <script>
-        function addItem(itemName, itemImage, itemDetails){
+        function addItem(itemName, itemImage, itemDetails, id){
             $('.product-grid').append(`
-                <div class="product-item">
+                <div class="product-item" data-id="${id}">
                     <img src="${itemImage}" alt="${itemName}">
                     <h3>${itemName}</h3>
-                    <div class="details">
-                        <p>${itemDetails}</p>
-                    </div>
+                    <div class="details"> <p>${itemDetails}</p> </div>
+                    <div class="delete-item">X</div>
                 </div>
             `);
         };
@@ -46,23 +52,31 @@
         $(document).ready(function() {
             let items = JSON.parse(localStorage.getItem('items')) || [];
     
-            items.forEach((item) => { addItem(item[0], item[1], item[2]); });
+            items.forEach((item) => { addItem(item[0], item[1], item[2], item[3]) });
     
             $('#add-item-form').submit(function(event) {
                 event.preventDefault();
                 
                 const name    = $('#item-name').val(),
                       image   = $('#item-image').val(),
-                      details = $('#item-details').val();
+                      details = $('#item-details').val(),
+                      id      = 'UIID-' + Math.random().toString(36).substr(2, 9);
     
-                addItem(name, image, details);
+                addItem(name, image, details, id);
                 
-                items.push([name, image, details]);
+                items.push([name, image, details, id]);
                 localStorage.setItem('items', JSON.stringify(items));
     
                 $('#item-name').val('');
                 $('#item-image').val('');
                 $('#item-details').val('');
+            });
+
+            $(document).on('click', '.delete-item', function() {
+                const parentItem = $(this).closest('.product-item');
+                items = items.filter(item => item[3] !== parentItem.data('id'));
+                localStorage.setItem('items', JSON.stringify(items));
+                parentItem.remove();
             });
         });
     </script>
