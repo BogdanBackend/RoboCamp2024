@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY вітрина</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <link rel="icon" type="image/png" href="templates/logo.png" />
+</head>
+<body>
+    <div hx-get="templates/header.html" hx-trigger="load" hx-target="this"></div>
+    
+    <div class="custom-showcase">
+        <h2>Додайте свій об'єкт :</h2>
+        <form id="add-item-form">
+            <input type="text" id="item-name" placeholder="Назва товару" required>
+            <input type="url" id="item-image" placeholder="URL зображення" required>
+            <input type="text" id="item-details" placeholder="Деталі товару" required>
+            <button type="submit">Додати</button>
+        </form>
+    </div>
+
+    <main class="main">
+        <section class="product-grid">
+
+        </section>
+    </main>
+
+    <div hx-get="templates/footer.html" hx-trigger="load" hx-target="this"></div>
+
+    <script>
+        function addItem(itemName, itemImage, itemDetails){
+            $('.product-grid').append(`
+                <div class="product-item">
+                    <img src="${itemImage}" alt="${itemName}">
+                    <h3>${itemName}</h3>
+                    <div class="details">
+                        <p>${itemDetails}</p>
+                    </div>
+                </div>
+            `);
+        };
+    
+        $(document).ready(function() {
+            let items = JSON.parse(localStorage.getItem('items')) || [];
+    
+            items.forEach((item) => { addItem(item[0], item[1], item[2]); });
+    
+            $('#add-item-form').submit(function(event) {
+                event.preventDefault();
+                
+                const name    = $('#item-name').val(),
+                      image   = $('#item-image').val(),
+                      details = $('#item-details').val();
+    
+                addItem(name, image, details);
+                
+                items.push([name, image, details]);
+                localStorage.setItem('items', JSON.stringify(items));
+    
+                $('#item-name').val('');
+                $('#item-image').val('');
+                $('#item-details').val('');
+            });
+        });
+    </script>
+    
+</body>
+</html>
